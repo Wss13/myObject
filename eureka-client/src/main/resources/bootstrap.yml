@@ -1,4 +1,24 @@
+#spring:
+#  profiles:
+#    active: eureka-client
+##    active: eureka-ribbon-client
 spring:
+  application:
+    name : eureka-client
+  cloud:
+    config :
+#      uri: http://localhost:8769
+      fail-fast: true
+      discovery:
+        enabled: true
+        serviceId: config-server
   profiles:
-    active: eureka-client
-#    active: eureka-ribbon-client
+    active: dev
+server:
+  port: 9000
+eureka:
+  instance:
+      instance-id: ${spring.application.name}:${random.int}
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:1111/eureka/
