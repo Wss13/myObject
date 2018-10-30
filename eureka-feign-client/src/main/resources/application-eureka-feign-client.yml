@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: eureka-feign-client
+server:
+  port: 9002
+eureka:
+  instance:
+      instance-id: ${spring.application.name}:${random.int}
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:1111/eureka/
+#开启熔断器配置
+fegin:
+  hystrix:
+    enabled: true

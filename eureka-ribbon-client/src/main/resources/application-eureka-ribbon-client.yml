@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: eureka-ribbon-client
+server:
+  port: 9001
+eureka:
+  instance:
+      instance-id: ${spring.application.name}:${random.int}
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:1111/eureka/

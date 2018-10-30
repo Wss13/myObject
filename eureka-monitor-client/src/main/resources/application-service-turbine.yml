@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: service-turbine
+server:
+  port: 9004
+eureka:
+  instance:
+      instance-id: ${spring.application.name}:${random.int}
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:1111/eureka/
+turbine:
+  aggregator:
+    clusterConfig: default
+  appConfig: eureka-ribbon-client,eureka-feign-client
+  clusterNameExpression: new String("default")
