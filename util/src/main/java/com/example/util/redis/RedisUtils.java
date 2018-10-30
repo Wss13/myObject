@@ -26,7 +26,7 @@ import java.util.concurrent.TimeUnit;
  * @version  v0.1 2018/09/18
  *
  * @see
- * @since    JDK1.8
+ * @since    JDK1.81
  */
 @SuppressWarnings("unchecked")
 @Component
