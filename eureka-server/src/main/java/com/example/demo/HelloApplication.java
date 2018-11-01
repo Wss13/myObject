@@ -1,6 +1,8 @@
 package com.example.demo;
 
+import com.example.dao.ConfigureDAO;
 import com.example.dao.UserMapper;
+import com.example.dto.Configuer;
 import com.example.dto.User;
 import com.example.util.redis.RedisUtils;
 import io.swagger.annotations.Api;
@@ -29,6 +31,8 @@ public class HelloApplication {
     @Autowired
     private UserMapper userMapper;
     @Autowired
+    private ConfigureDAO configureDAO;
+    @Autowired
     private RedisUtils redisUtils;
 
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
@@ -55,6 +59,7 @@ public class HelloApplication {
         Map map = new HashMap(16);
         map.put("email", "user");
         map.put("password", "123");
+        configureDAO.queryAllConfigure();
         userMapper.isPassLoginCheck(map);
         redisUtils.hget("lmc", "");
         String id = request.getParameter("id") == null ? "0" : request.getParameter("id");
