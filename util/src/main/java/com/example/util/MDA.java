@@ -1,5 +1,8 @@
 package com.example.util;
 
+
+import com.example.util.moudl.AppModule;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +14,7 @@ import java.util.Map;
  * @author liumc
  * @date 2018/10/31
  */
+@AppModule(moduleName = "utilMDA")
 public class MDA {
     public static final String name = new String("Mike");
     public static final String TEST_NAME = new String("TEST_NAME");

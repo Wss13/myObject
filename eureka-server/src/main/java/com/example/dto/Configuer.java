@@ -1,5 +1,7 @@
 package com.example.dto;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 /**
  * Demo class
  *
@@ -8,8 +10,8 @@ package com.example.dto;
  */
 public class Configuer {
     String moudleName;
-
     public String getMoudleName() {
+
         return moudleName;
     }
 

@@ -3,14 +3,16 @@ package com.example.configure;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.example.configure.dto.Configuer;
-import com.example.util.MDA;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import com.example.servicetest.BeanWayService;
+import com.example.util.moudl.AppModule;
+import org.reflections.Reflections;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -21,6 +23,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Demo class
@@ -29,22 +32,43 @@ import java.util.Map;
  * @date 2018/10/31
  */
 @Configuration
+
+@ComponentScan("com.example")
 public class ConfigureInit {
     String mysqlJDBC = "jdbc:mysql://localhost:3306/demo?user=root&password=123456&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8";
     private static PreparedStatement preparedStatement = null;
     @Bean
     public List test() throws Exception {
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection connection = DriverManager.getConnection(mysqlJDBC);
-        ResultSet rs = query(connection, "select t.moudle_name as 'moudleName'," +
-                "t.moudle_key_name as 'moudleKeyName',t.moudle_value as 'moudleValue',t.type as 'type'  from configure t");
-        ReflectHelper<Configuer> reflectHelper = new ReflectHelper<Configuer>();
-        List<Configuer> configuers = reflectHelper.getList(Configuer.class,rs);
-        for (Configuer configuer:configuers) {
-            modify(configuer);
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection connection = DriverManager.getConnection(mysqlJDBC);
+            ResultSet rs = query(connection, "select t.moudle_name as 'moudleName'," +
+                    "t.moudle_key_name as 'moudleKeyName',t.moudle_value as 'moudleValue',t.type as 'type'  from configure t");
+            ReflectHelper<Configuer> reflectHelper = new ReflectHelper<Configuer>();
+            List<Configuer> configuers = reflectHelper.getList(Configuer.class,rs);
+        try{
+            for (Configuer configuer:configuers) {
+                modify(configuer);
+            }
+        }catch (Exception e){
         }
         return reflectHelper.getList(Configuer.class,rs);
     }
+    @Bean
+    public int getMoudl(){
+        Set<Class<?>> classes = new Reflections("com.*").getTypesAnnotatedWith(AppModule.class);
+        for(Class clazz :classes){
+            int a = 1;
+        }
+        return 1;
+    }
+    @Bean(initMethod="init",destroyMethod="destroy")
+    BeanWayService beanWayService(){
+        BeanWayService b = new BeanWayService();
+        b.setP(111);
+        return b;
+    }
+
+
     public static ResultSet query(Connection connection, String sql) throws SQLException {
         ResultSet rs = null;
         try {
@@ -101,6 +125,8 @@ public class ConfigureInit {
             case "interface java.util.Map":
                 newFieldValue = JSON.parseObject(newFieldValue.toString(),Map.class);
                 break;
+             default:
+                 break;
         }
         return newFieldValue;
     }
