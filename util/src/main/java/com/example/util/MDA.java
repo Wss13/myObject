@@ -27,4 +27,13 @@ public class MDA {
     static {
         map.put("k","v");
     }
+    public static final long TEST_LONG = new Long(1L);
+    public static final int TEST_INT = new Integer(1);
+    public static final boolean TEST_BOOLEAN = true;
+    public static final Boolean TEST_BOOLEAN_X = true;
+    public static final Long TEST_LONG_X = new Long(1L);
+    public static final Integer TEST_INT_X = new Integer(1);
+    public static final String TEST_STRING_X = "1";
+    public static final long TEST_LONG_S = 1;
+    public static final int TEST_INT_S = 1;
 }

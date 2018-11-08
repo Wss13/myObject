@@ -6,9 +6,11 @@ import com.example.configure.dto.Configuer;
 import com.example.servicetest.BeanWayService;
 import com.example.util.moudl.AppModule;
 import org.reflections.Reflections;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -124,6 +126,21 @@ public class ConfigureInit {
                 break;
             case "interface java.util.Map":
                 newFieldValue = JSON.parseObject(newFieldValue.toString(),Map.class);
+                break;
+            case "long":
+                newFieldValue = Long.parseLong(newFieldValue.toString());
+                break;
+            case "int":
+                newFieldValue = Integer.parseInt(newFieldValue.toString());
+                break;
+            case "boolean":
+                newFieldValue = Boolean.parseBoolean(newFieldValue.toString());
+                break;
+            case "class java.lang.Integer":
+                newFieldValue = Integer.parseInt(newFieldValue.toString());
+                break;
+            case "class java.lang.Long":
+                newFieldValue = Long.parseLong(newFieldValue.toString());
                 break;
              default:
                  break;
