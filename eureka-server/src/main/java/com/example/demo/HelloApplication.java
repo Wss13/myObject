@@ -21,7 +21,7 @@ import java.util.Random;
 import java.util.logging.Logger;
 
 @RestController
-@Api(tags = {"前置机信息表相关API"})
+@Api(tags = {"测试"})
 public class HelloApplication {
     private final Logger logger = Logger.getLogger(String.valueOf(getClass()));
     @Autowired
@@ -44,7 +44,7 @@ public class HelloApplication {
         return "Hello World!";
     }
 
-    @ApiOperation(value = "前置机信息表分页列表", httpMethod = "GET", notes = "分页查询前置机信息表")
+    @ApiOperation(value = "用户信息", httpMethod = "GET", notes = "用户信息")
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public User getUser(HttpServletRequest request) throws InterruptedException {
         String id = request.getParameter("id") == null ? "0" : request.getParameter("id");
