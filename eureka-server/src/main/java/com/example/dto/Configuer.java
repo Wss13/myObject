@@ -1,6 +1,5 @@
 package com.example.dto;
 
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Demo class

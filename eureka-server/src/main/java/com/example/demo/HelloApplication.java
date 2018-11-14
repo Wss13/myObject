@@ -2,16 +2,13 @@ package com.example.demo;
 
 import com.example.dao.ConfigureDAO;
 import com.example.dao.UserMapper;
-import com.example.dto.Configuer;
 import com.example.dto.User;
 import com.example.util.redis.RedisUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
-import org.springframework.web.HttpRequestHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -32,9 +29,9 @@ public class HelloApplication {
     @Autowired
     private UserMapper userMapper;
     @Autowired
-    private ConfigureDAO configureDAO;
-    @Autowired
     private RedisUtils redisUtils;
+    @Autowired
+    private ConfigureDAO configureDAO;
 
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public String index() throws InterruptedException {

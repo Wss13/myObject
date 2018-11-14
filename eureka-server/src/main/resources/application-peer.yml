@@ -3,6 +3,8 @@ server:
 spring:
   application:
     name: eureka-server
+  profiles:
+    include: config-server
 eureka:
   instance:
     hostname: peer1

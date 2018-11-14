@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.dao.ConfigureDAO">
-    <parameterMap id="parameterMap" type="com.example.dto.Configuer"></parameterMap>
     <resultMap id="resultMap" type="com.example.dto.Configuer">
         <result property="moudleName" column="moudle_name"/>
         <result property="moudleKeyName" column="moudle_key_name"/>

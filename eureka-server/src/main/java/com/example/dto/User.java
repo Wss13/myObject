@@ -1,12 +1,14 @@
 package com.example.dto;
 
+/**
+ * Demo class
+ *
+ * @author liumc
+ * @date 2018/11/13
+ */
 public class User {
-    public User(Long id){
-        this.id = id;
-    }
-
-    public User() {
-
+    public User(long l) {
+        this.id = l;
     }
 
     public Long getId() {

@@ -2,7 +2,6 @@ package com.example.dao;
 
 import com.example.dto.Configuer;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
