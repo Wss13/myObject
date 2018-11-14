@@ -22,7 +22,7 @@ public class RibbonController {
     private LoadBalancerClient loadBalancerClient;
     @Autowired
     private DiscoveryClient client;
-    @ApiOperation(value = "前置机信息表分页列表", httpMethod = "GET", notes = "分页查询前置机信息表")
+    @ApiOperation(value = "获取当前当前服务配置信息", httpMethod = "GET", notes = "获取当前当前服务配置信息")
     @RequestMapping(value = "/hi", method = RequestMethod.GET)
     public String hi(@RequestParam(required = false,defaultValue = "forezp") String name){
         ServiceInstance instance = client.getLocalServiceInstance();

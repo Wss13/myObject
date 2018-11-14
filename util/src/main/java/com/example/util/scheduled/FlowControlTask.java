@@ -12,7 +12,7 @@ public class FlowControlTask {
     /**
      * 固定cron配置定时任务
      */
-    @Scheduled(cron = "0/20 * * * * ?")
+//    @Scheduled(cron = "0/20 * * * * ?")
     public void doTask() throws Exception {
         System.out.println("20秒时间到了");
     }
