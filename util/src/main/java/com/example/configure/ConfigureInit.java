@@ -98,12 +98,15 @@ public class ConfigureInit {
 
     private static List convertList(ResultSet rs) throws SQLException {
         List list = new ArrayList();
-        ResultSetMetaData md = rs.getMetaData();//获取键名
-        int columnCount = md.getColumnCount();//获取行的数量
+        /**获取键名*/
+        ResultSetMetaData md = rs.getMetaData();
+        /**获取行的数量*/
+        int columnCount = md.getColumnCount();
         while (rs.next()) {
-            Map rowData = new HashMap();//声明Map
+            Map rowData = new HashMap(16);
             for (int i = 1; i <= columnCount; i++) {
-                rowData.put(md.getColumnName(i), rs.getObject(i));//获取键名及值
+                /**获取键名及值*/
+                rowData.put(md.getColumnName(i), rs.getObject(i));
             }
             list.add(rowData);
         }
