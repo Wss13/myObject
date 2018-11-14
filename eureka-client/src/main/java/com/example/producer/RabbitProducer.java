@@ -18,7 +18,7 @@ import java.util.UUID;
  */
 
 @Component
-public class MsgProducer implements RabbitTemplate.ConfirmCallback {
+public class RabbitProducer implements RabbitTemplate.ConfirmCallback {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /**
@@ -29,7 +29,7 @@ public class MsgProducer implements RabbitTemplate.ConfirmCallback {
      * 构造方法注入rabbitTemplate
      */
     @Autowired
-    public MsgProducer(RabbitTemplate rabbitTemplate) {
+    public RabbitProducer(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
         /**
          * rabbitTemplate如果为单例的话，那回调就是最后设置的内容

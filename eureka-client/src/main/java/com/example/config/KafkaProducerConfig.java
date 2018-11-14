@@ -15,7 +15,7 @@ import java.util.Map;
 
 /**
  * Demo class
- *
+ * kafka生产者
  * @author liumc
  * @date 2018/11/14
  */
