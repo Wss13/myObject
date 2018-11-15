@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import com.example.configure.plugin.IPlugin;
+import com.example.configure.plugin.PluginFactory;
 import com.example.dao.ConfigureDAO;
 import com.example.dao.UserMapper;
 import com.example.dto.User;
@@ -32,6 +34,8 @@ public class HelloApplication {
     private RedisUtils redisUtils;
     @Autowired
     private ConfigureDAO configureDAO;
+    @Autowired
+    private PluginFactory pluginFactory;
 
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public String index() throws InterruptedException {
@@ -57,6 +61,10 @@ public class HelloApplication {
         Map map = new HashMap(16);
         map.put("email", "user");
         map.put("password", "123");
+        IPlugin<?> iPlugin = (IPlugin) pluginFactory.getPublic("A");
+        iPlugin.printBeanName();
+        IPlugin iPlugin1 = (IPlugin) pluginFactory.getPublic("B");
+        iPlugin1.printBeanName();
         configureDAO.queryAllConfigure();
         userMapper.isPassLoginCheck(map);
         redisUtils.hget("lmc", "");

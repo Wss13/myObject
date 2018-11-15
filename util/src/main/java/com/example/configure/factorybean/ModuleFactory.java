@@ -9,19 +9,12 @@ import java.util.Map;
  * @author liumc
  * @date 2018/11/05
  */
-public class ModuleFactory {
-    public Map<String, Class> getModuleMap() {
-        return moduleMap;
+public class ModuleFactory<K,V> {
+    public Map<K,V> map = new HashMap<>(16);
+    public void steModule(K k,V v){
+        this.map.put(k,v);
     }
-
-    public void setModuleMap(Map<String, Class> moduleMap) {
-        this.moduleMap = moduleMap;
+    public V getMoudle(K k){
+        return this.map.get(k);
     }
-    public void init(){
-        if(this.moduleMap==null){
-            this.moduleMap = new HashMap<String, Class>();
-        }
-    }
-
-    private Map<String,Class> moduleMap;
 }

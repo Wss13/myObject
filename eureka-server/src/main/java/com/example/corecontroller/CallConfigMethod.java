@@ -18,14 +18,16 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 2018/11/01
  */
 @RestController
-public class callConfigMethod {
+public class CallConfigMethod {
     @Autowired
     BeanWayService beanWayService;
+    @Autowired
+    ConfigureInit configureInit;
     @RequestMapping(value = "modify")
     public void modify(Configuer configuer){
         try {
             new Reflections("cn.*", new MethodAnnotationsScanner(), new TypeAnnotationsScanner(), new SubTypesScanner());
-            ConfigureInit.modify(configuer);
+            configureInit.modify(configuer);
         } catch (Exception e) {
             e.printStackTrace();
         }

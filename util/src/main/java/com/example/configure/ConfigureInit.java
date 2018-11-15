@@ -3,6 +3,7 @@ package com.example.configure;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.example.configure.dto.Configuer;
+import com.example.configure.factorybean.ModuleFactory;
 import com.example.servicetest.BeanWayService;
 import com.example.util.moudl.AppModule;
 import org.reflections.Reflections;
@@ -26,6 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Logger;
 
 /**
  * Demo class
@@ -39,7 +41,9 @@ import java.util.Set;
 public class ConfigureInit {
     String mysqlJDBC = "jdbc:mysql://localhost:3306/demo?user=root&password=123456&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8";
     private static PreparedStatement preparedStatement = null;
-
+    @Autowired
+    ModuleFactory<String,Class> moduleFactory;
+    private final Logger logger = Logger.getLogger(String.valueOf(getClass()));
     @Bean
     public List test() throws Exception {
         Class.forName("com.mysql.jdbc.Driver");
@@ -116,10 +120,17 @@ public class ConfigureInit {
     /**
      *修改模块静态变量的值
      */
-    public static void modify(Configuer configuer) throws Exception {
+    public void modify(Configuer configuer) throws Exception {
         String moudleName = configuer.getMoudleName();
         String newFieldValue = configuer.getMoudleValue();
-        Object object = (Object) Class.forName(moudleName).newInstance();
+        /*Object object = (Object) Class.forName(moudleName).newInstance();*/
+        Class clazz = moduleFactory.getMoudle(moudleName);
+        if(moduleFactory.getMoudle(moudleName)==null){
+            logger.info("当前模块工厂没有"+moudleName + "请检查配置");
+            return;
+        }
+        /* class 生成实例*/
+        Object object = (Object)clazz.newInstance();
         Field field = object.getClass().getDeclaredField(configuer.getMoudleKeyName());
         Field[] fields = object.getClass().getDeclaredFields();
         Field modifiersField = Field.class.getDeclaredField("modifiers");

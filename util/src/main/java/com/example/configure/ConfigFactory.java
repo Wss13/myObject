@@ -22,18 +22,16 @@ import java.util.Set;
  */
 @Configuration
 public class ConfigFactory {
-    @Bean(initMethod="init")
+    @Bean
     public ModuleFactory getModuleFactory() throws IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
-        ModuleFactory moduleFactory = new ModuleFactory();
-        Map<String,Class> moduleMap = new HashMap<String,Class>();
+        ModuleFactory<String,Class> moduleFactory = new ModuleFactory();
         Set<Class<?>> classes = new Reflections("com.*").getTypesAnnotatedWith(AppModule.class);
         for(Class clazz :classes){
             AppModule t = (AppModule) clazz.getAnnotation(AppModule.class);
             // 第一个参数是传进去的方法名称，第二个参数是 传进去的类型；
             Method m = t.getClass().getMethod("moduleName");
-            moduleMap.put(m.invoke(t).toString(),clazz);
+            moduleFactory.steModule(m.invoke(t).toString(),clazz);
         }
-        moduleFactory.setModuleMap(moduleMap);
         return  moduleFactory ;
     }
     @Bean(initMethod = "init",destroyMethod = "destroy")
