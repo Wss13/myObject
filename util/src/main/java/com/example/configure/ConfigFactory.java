@@ -29,8 +29,9 @@ public class ConfigFactory {
         for(Class clazz :classes){
             AppModule t = (AppModule) clazz.getAnnotation(AppModule.class);
             // 第一个参数是传进去的方法名称，第二个参数是 传进去的类型；
-            Method m = t.getClass().getMethod("moduleName");
-            moduleFactory.steModule(m.invoke(t).toString(),clazz);
+//            Method m = t.getClass().getMethod("moduleName");
+//            m.invoke(t).toString()
+            moduleFactory.steModule(t.moduleName(),clazz);
         }
         return  moduleFactory ;
     }

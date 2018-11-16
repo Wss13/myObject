@@ -1,4 +1,4 @@
-package com.example.util.moudl;
+package com.example.springmvcmock.module;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -10,12 +10,13 @@ import java.lang.annotation.Target;
  * Demo class
  *
  * @author liumc
- * @date 2018/11/02
+ * @date 2018/11/16
  */
-@Documented
+/* 设置注解类型*/
+@Target(ElementType.TYPE)
+/* 设置生命周期*/
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.TYPE,ElementType.FIELD})
-public @interface AppModule {
-    String moduleName() default "";
-    boolean ifChange() default true;
+@Documented
+public @interface MyController {
+    String value() default "";
 }

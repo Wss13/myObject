@@ -62,7 +62,7 @@ public class HelloApplication {
         map.put("email", "user");
         map.put("password", "123");
         IPlugin<?> iPlugin = (IPlugin) pluginFactory.getPublic("A");
-        iPlugin.printBeanName();
+        Map a = (Map) iPlugin.printBeanName();
         IPlugin iPlugin1 = (IPlugin) pluginFactory.getPublic("B");
         iPlugin1.printBeanName();
         configureDAO.queryAllConfigure();

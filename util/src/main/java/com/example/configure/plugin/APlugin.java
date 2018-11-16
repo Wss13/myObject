@@ -15,9 +15,9 @@ import java.util.Map;
 public class APlugin implements IPlugin<Map>{
     @Override
     public Map printBeanName() {
-        System.out.println("我是B");
+        System.out.println("我是A");
         Map map = new HashMap();
-        map.put("name","B");
+        map.put("name","A");
         return map;
     }
 }

@@ -45,7 +45,7 @@ public class ConfigureInit {
     ModuleFactory<String,Class> moduleFactory;
     private final Logger logger = Logger.getLogger(String.valueOf(getClass()));
     @Bean
-    public List test() throws Exception {
+    public List appModuleParamSet() throws Exception {
         Class.forName("com.mysql.jdbc.Driver");
         Connection connection = DriverManager.getConnection(mysqlJDBC);
         ResultSet rs = query(connection, "select t.moudle_name as 'moudleName'," +
@@ -57,7 +57,7 @@ public class ConfigureInit {
             try {
                 modify(configuer);
             } catch (Exception e) {
-
+                continue;
             }
 
         }
@@ -132,6 +132,11 @@ public class ConfigureInit {
         /* class 生成实例*/
         Object object = (Object)clazz.newInstance();
         Field field = object.getClass().getDeclaredField(configuer.getMoudleKeyName());
+        AppModule appModuleParam = field.getAnnotation(AppModule.class);
+
+        if(appModuleParam != null && !appModuleParam.ifChange()){
+            return;
+        }
         Field[] fields = object.getClass().getDeclaredFields();
         Field modifiersField = Field.class.getDeclaredField("modifiers");
         //Field 的 modifiers 是私有的

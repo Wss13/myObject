@@ -16,6 +16,7 @@ import java.util.Map;
  */
 @AppModule(moduleName = "utilMDA")
 public class MDA {
+    @AppModule(ifChange = false)
     public static final String name = new String("Mike");
     public static final String TEST_NAME = new String("TEST_NAME");
     public static final String[] NAME_LIST = new String[]{"liu","lu"};
