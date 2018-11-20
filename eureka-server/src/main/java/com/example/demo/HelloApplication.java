@@ -57,7 +57,7 @@ public class HelloApplication {
 
     @RequestMapping(value = "/users1", method = RequestMethod.GET)
     @ResponseBody
-    public User getUser1(HttpServletRequest request) throws InterruptedException {
+    public User getUser1(String id) throws InterruptedException {
         Map map = new HashMap(16);
         map.put("email", "user");
         map.put("password", "123");
@@ -68,7 +68,6 @@ public class HelloApplication {
         configureDAO.queryAllConfigure();
         userMapper.isPassLoginCheck(map);
         redisUtils.hget("lmc", "");
-        String id = request.getParameter("id") == null ? "0" : request.getParameter("id");
         return new User(Long.parseLong(id));
     }
 }

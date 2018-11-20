@@ -1,4 +1,4 @@
-package com.example.springmvcmock.factory;
+package com.example.myframe.springmvcmock.factory;
 
 import java.util.HashMap;
 import java.util.Map;

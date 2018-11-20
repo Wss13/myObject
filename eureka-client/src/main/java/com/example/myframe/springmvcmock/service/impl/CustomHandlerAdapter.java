@@ -1,8 +1,8 @@
-package com.example.springmvcmock.service.impl;
+package com.example.myframe.springmvcmock.service.impl;
 
-import com.example.springmvcmock.module.MyService;
-import com.example.springmvcmock.service.ArgumentResolver;
-import com.example.springmvcmock.service.HandlerAdapterService;
+import com.example.myframe.springmvcmock.module.MyService;
+import com.example.myframe.springmvcmock.service.ArgumentResolver;
+import com.example.myframe.springmvcmock.service.HandlerAdapterService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

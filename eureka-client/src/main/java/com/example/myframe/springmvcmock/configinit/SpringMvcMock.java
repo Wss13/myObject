@@ -1,11 +1,11 @@
-package com.example.springmvcmock.configinit;
+package com.example.myframe.springmvcmock.configinit;
 
 import com.example.configure.factorybean.ModuleFactory;
-import com.example.springmvcmock.factory.FactoryMock;
-import com.example.springmvcmock.module.MyController;
-import com.example.springmvcmock.module.MyQualifier;
-import com.example.springmvcmock.module.MyRequestMapping;
-import com.example.springmvcmock.module.MyService;
+import com.example.myframe.springmvcmock.factory.FactoryMock;
+import com.example.myframe.springmvcmock.module.MyController;
+import com.example.myframe.springmvcmock.module.MyQualifier;
+import com.example.myframe.springmvcmock.module.MyRequestMapping;
+import com.example.myframe.springmvcmock.module.MyService;
 import com.example.util.moudl.AppModule;
 import org.reflections.Reflections;
 import org.springframework.context.annotation.Bean;
@@ -47,7 +47,7 @@ public class SpringMvcMock {
      * @throws InstantiationException
      */
     private void doInstance(FactoryMock<Object> factoryMock) throws IllegalAccessException, InstantiationException {
-        Reflections reflections = new Reflections("com.example.springmvcmock");
+        Reflections reflections = new Reflections("com.example.myframe.springmvcmock");
         Set<Class<?>> myControllerList = reflections.getTypesAnnotatedWith(MyController.class);
         Set<Class<?>> myServiceList = reflections.getTypesAnnotatedWith(MyService.class);
         for (Class clazzController:myControllerList) {

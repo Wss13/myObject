@@ -1,7 +1,7 @@
-package com.example.springmvcmock.service.impl;
+package com.example.myframe.springmvcmock.service.impl;
 
-import com.example.springmvcmock.module.MyService;
-import com.example.springmvcmock.service.IMyTestSerivce;
+import com.example.myframe.springmvcmock.module.MyService;
+import com.example.myframe.springmvcmock.service.IMyTestSerivce;
 
 /**
  * Demo class

@@ -1,4 +1,4 @@
-package com.example.springmvcmock.service;
+package com.example.myframe.springmvcmock.service;
 
 /**
  * Demo class

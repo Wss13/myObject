@@ -1,4 +1,4 @@
-package com.example.springmvcmock.module;
+package com.example.myframe.springmvcmock.module;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -12,9 +12,9 @@ import java.lang.annotation.Target;
  * @author liumc
  * @date 2018/11/16
  */
-@Target(ElementType.FIELD)
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface MyQualifier {
+public @interface MyService {
     String value() default "";
 }

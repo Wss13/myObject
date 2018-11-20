@@ -1,7 +1,7 @@
-package com.example.springmvcmock.service;
+package com.example.myframe.springmvcmock.service;
 
-import com.example.springmvcmock.factory.FactoryMock;
-import com.example.springmvcmock.module.MyController;
+import com.example.myframe.springmvcmock.factory.FactoryMock;
+import com.example.myframe.springmvcmock.module.MyController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

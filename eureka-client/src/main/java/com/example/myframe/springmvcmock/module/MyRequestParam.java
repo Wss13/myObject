@@ -1,4 +1,4 @@
-package com.example.springmvcmock.module;
+package com.example.myframe.springmvcmock.module;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
