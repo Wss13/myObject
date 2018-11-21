@@ -3,11 +3,13 @@ package com.example.myframe.httpclient;
 import com.example.myframe.httpclient.module.IpAutowired;
 import com.example.myframe.httpclient.module.IpConfig;
 import org.reflections.Reflections;
+import org.springframework.beans.factory.FactoryBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.lang.reflect.Field;
-import java.util.HashMap;
 import java.util.Set;
 
 /**
@@ -17,34 +19,34 @@ import java.util.Set;
  * @date 2018/11/19
  */
 @Configuration
-public class httpClientMock {
-
+public class HttpClientMock {
+    @Autowired
+    ConfigurableBeanFactory beanFactory;
 
     @Bean
-    public HttpBuildFactoryBean httpClientFactory(){
-        HttpClientFactory httpClientFactory = new HttpClientFactory(new HashMap(16));
-        HttpBuildFactoryBean httpBuildFactoryBean = new HttpBuildFactoryBean();
-        doIoc(httpBuildFactoryBean);
+    public ConfigurableBeanFactory httpClientFactory(){
+        doIoc();
         /** 4.建立path与method的映射关系*/
 //        handlerMapping(httpClientFactory);
-        return httpBuildFactoryBean;
+        return beanFactory;
     }
 
     /**
      * 生成一个接口代理工厂
-     * @param httpBuildFactoryBean
      */
-    public void doIoc(HttpBuildFactoryBean httpBuildFactoryBean){
+    public void doIoc(){
         Reflections reflections = new Reflections("com.example.httpclient");
         Set<Class<?>> classes = reflections.getTypesAnnotatedWith(IpConfig.class);
         HttpClientSession httpClientSession = new HttpClientSession();
-        httpBuildFactoryBean.setHttpClientSession(httpClientSession);
         for (Class<?> clazz:classes) {
+            HttpBuildFactoryBean httpBuildFactoryBean = new HttpBuildFactoryBean();
+            httpBuildFactoryBean.setHttpClientSession(httpClientSession);
             HttpProxyFactory httpProxyFactory = new HttpProxyFactory(clazz);
-            httpBuildFactoryBean.setHttpProxyFactory(httpProxyFactory);
-            httpBuildFactoryBean.setMapperInterface(clazz);
+//            httpBuildFactoryBean.setHttpProxyFactory(httpProxyFactory);
+//            httpBuildFactoryBean.setMapperInterface(clazz);
+            beanFactory.registerSingleton(clazz.getName(),httpProxyFactory.newInstance(httpClientSession));
             try {
-                httpBuildFactoryBean.getObject();
+//                httpBuildFactoryBean.getObject();
             } catch (Exception e) {
                 e.printStackTrace();
             }

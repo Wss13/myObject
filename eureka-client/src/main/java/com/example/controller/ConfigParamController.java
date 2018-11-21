@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import com.example.httpclient.HttpClientTest;
+import com.example.httpclient.HttpClientTest1;
 import com.example.myframe.httpclient.HttpClientFactory;
 import com.example.myframe.httpclient.module.IpAutowired;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +24,15 @@ public class ConfigParamController {
     HttpClientFactory httpClientFactory;*/
     @Autowired
     HttpClientTest httpClientTest;
+    @Autowired
+    HttpClientTest1 httpClientTest1;
     @Value("${foo}")
     String foo;
     @RequestMapping(value = "foo")
     public String hi(){
 //        HttpClientTest t = (HttpClientTest) httpClientFactory.getHttpClient(HttpClientTest.class);
         httpClientTest.getUser1("213412");
+        httpClientTest1.getUser1("adfsadfasdf");
         return foo;
     }
 }
