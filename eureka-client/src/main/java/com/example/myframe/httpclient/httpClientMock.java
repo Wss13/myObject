@@ -21,24 +21,34 @@ public class httpClientMock {
 
 
     @Bean
-    public HttpClientFactory httpClientFactory(){
+    public HttpBuildFactoryBean httpClientFactory(){
         HttpClientFactory httpClientFactory = new HttpClientFactory(new HashMap(16));
-        doIoc(httpClientFactory);
+        HttpBuildFactoryBean httpBuildFactoryBean = new HttpBuildFactoryBean();
+        doIoc(httpBuildFactoryBean);
         /** 4.建立path与method的映射关系*/
 //        handlerMapping(httpClientFactory);
-        return httpClientFactory;
+        return httpBuildFactoryBean;
     }
 
     /**
      * 生成一个接口代理工厂
-     * @param httpClientFactory
+     * @param httpBuildFactoryBean
      */
-    public void doIoc(HttpClientFactory httpClientFactory){
+    public void doIoc(HttpBuildFactoryBean httpBuildFactoryBean){
         Reflections reflections = new Reflections("com.example.httpclient");
         Set<Class<?>> classes = reflections.getTypesAnnotatedWith(IpConfig.class);
         HttpClientSession httpClientSession = new HttpClientSession();
+        httpBuildFactoryBean.setHttpClientSession(httpClientSession);
         for (Class<?> clazz:classes) {
-            httpClientFactory.putHttpClient(clazz,httpClientSession.getMapper(clazz));
+            HttpProxyFactory httpProxyFactory = new HttpProxyFactory(clazz);
+            httpBuildFactoryBean.setHttpProxyFactory(httpProxyFactory);
+            httpBuildFactoryBean.setMapperInterface(clazz);
+            try {
+                httpBuildFactoryBean.getObject();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+//            httpClientFactory.putHttpClient(clazz, httpProxyFactory.newInstance(httpClientSession));
         }
     }
 

@@ -18,12 +18,14 @@ import java.util.Map;
  * @author liumc
  * @date 2018/11/19
  */
-public class MyHttpClientHandler<T> implements InvocationHandler,IHttpCommon {
+public class HttpProxy<T> implements InvocationHandler,IHttpCommon {
     private HttpClientSession httpClientSession=null;
+    private final Class<T> mapperInterface;
     private HttpUitls httpUitls;
-    public MyHttpClientHandler(HttpClientSession httpClientSession) {
+    public HttpProxy(HttpClientSession httpClientSession,Class<T> mapperInterface) {
         this.httpClientSession = httpClientSession;
         this.httpUitls = httpClientSession.getHttpUitls();
+        this.mapperInterface = mapperInterface;
     }
 
     /**
@@ -36,23 +38,28 @@ public class MyHttpClientHandler<T> implements InvocationHandler,IHttpCommon {
      */
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        StringBuffer stringBuffer = new StringBuffer();
-        Class<?> parentClazz = method.getDeclaringClass();
-        RequestMapping requestAnnotation = method.getAnnotation(RequestMapping.class);
-        /**
-         * 方法和类注解的地址进行拼接
-         */
-        stringBuffer.append(parentClazz.getAnnotation(IpConfig.class).value());
-        stringBuffer.append(requestAnnotation.value()[0]);
-        String method1 = requestAnnotation.method()[0].toString();
-        if(method1.equals("GET")){
-            if(args.length != 0){
-                stringBuffer.append(doGet(method,args));
-            }
-            sendGet(stringBuffer.toString());
-        }else if(method1.equals("POST")){
+        if (Object.class.equals(method.getDeclaringClass())) {
+            method.invoke(proxy,args);
+        }else{
+            StringBuffer stringBuffer = new StringBuffer();
+            Class<?> parentClazz = method.getDeclaringClass();
+            RequestMapping requestAnnotation = method.getAnnotation(RequestMapping.class);
+            /**
+             * 方法和类注解的地址进行拼接
+             */
+            stringBuffer.append(parentClazz.getAnnotation(IpConfig.class).value());
+            stringBuffer.append(requestAnnotation.value()[0]);
+            String method1 = requestAnnotation.method()[0].toString();
+            if(method1.equals("GET")){
+                if(args.length != 0){
+                    stringBuffer.append(doGet(method,args));
+                }
+                sendGet(stringBuffer.toString());
+            }else if(method1.equals("POST")){
 
+            }
         }
+
 
         return null;
     }

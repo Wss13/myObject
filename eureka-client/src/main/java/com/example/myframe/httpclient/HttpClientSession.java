@@ -11,9 +11,9 @@ import java.lang.reflect.Proxy;
 public class HttpClientSession {
     HttpUitls httpUitls = new HttpUitls();
 
-    public <T> T getMapper(Class<T> clazz){
-        return (T)Proxy.newProxyInstance(clazz.getClassLoader(),new Class[]{clazz}, new MyHttpClientHandler<>(this));
-    }
+//    public <T> T getMapper(Class<T> clazz){
+//        return (T)Proxy.newProxyInstance(clazz.getClassLoader(),new Class[]{clazz}, new HttpProxy<>(this));
+//    }
     public HttpUitls getHttpUitls(){
         return httpUitls;
     }

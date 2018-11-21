@@ -3,6 +3,7 @@ package com.example.httpclient;
 import com.example.dto.User;
 import com.example.myframe.httpclient.module.IpConfig;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 

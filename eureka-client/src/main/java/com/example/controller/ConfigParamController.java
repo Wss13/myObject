@@ -19,14 +19,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RefreshScope
 public class ConfigParamController {
+/*    @Autowired
+    HttpClientFactory httpClientFactory;*/
     @Autowired
-    HttpClientFactory httpClientFactory;
+    HttpClientTest httpClientTest;
     @Value("${foo}")
     String foo;
     @RequestMapping(value = "foo")
     public String hi(){
-        HttpClientTest t = (HttpClientTest) httpClientFactory.getHttpClient(HttpClientTest.class);
-        t.getUser1("213412");
+//        HttpClientTest t = (HttpClientTest) httpClientFactory.getHttpClient(HttpClientTest.class);
+        httpClientTest.getUser1("213412");
         return foo;
     }
 }
