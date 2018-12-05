@@ -36,7 +36,6 @@ import java.util.logging.Logger;
  * @date 2018/10/31
  */
 @Configuration
-
 @ComponentScan("com.example")
 public class ConfigureInit {
     String mysqlJDBC = "jdbc:mysql://localhost:3306/demo?user=root&password=123456&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8";
@@ -137,7 +136,6 @@ public class ConfigureInit {
         if(appModuleParam != null && !appModuleParam.ifChange()){
             return;
         }
-        Field[] fields = object.getClass().getDeclaredFields();
         Field modifiersField = Field.class.getDeclaredField("modifiers");
         //Field 的 modifiers 是私有的
         modifiersField.setAccessible(true);

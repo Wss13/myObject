@@ -12,7 +12,7 @@ import org.springframework.remoting.rmi.RmiProxyFactoryBean;
  * @date 2018/11/06
  */
 //@Configuration
-@ComponentScan("com.example")
+//@ComponentScan("com.example")
 public class RmiProxyFactory {
 //    @Bean
     public RmiProxyFactoryBean rmiProxyFactoryBean() {

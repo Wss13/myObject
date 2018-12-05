@@ -3,12 +3,14 @@ package com.example.myframe.httpclient;
 import com.alibaba.fastjson.JSON;
 import com.example.HttpUtil;
 import com.example.myframe.httpclient.module.IpConfig;
+import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 import java.lang.reflect.TypeVariable;
 import java.util.Map;
 
@@ -71,19 +73,21 @@ public class HttpProxy<T> implements InvocationHandler,IHttpCommon {
      * @return
      */
     public String doGet(Method method,Object[] args){
+        LocalVariableTableParameterNameDiscoverer u = new LocalVariableTableParameterNameDiscoverer();
+
         StringBuffer stringBuffer = new StringBuffer();
         stringBuffer.append("?");
-        Annotation[][] an = method.getParameterAnnotations();
-        for(int i = 0;i<args.length;i++){
-            Annotation[] paramAns = an[i];
-            for (Annotation param:paramAns) {
-                if (Param.class.isAssignableFrom(param.getClass())) {
-                    Param cr = (Param) param;
-                    String value = cr.value();
-                    stringBuffer.append(value+"="+args[i]);
-                }
+        //jdk1.8关闭，默认是关闭的所以一开始用了注解的形式获取参数名称
+        /** preferences-》Java Compiler->设置模块字节码版本1.8，Javac Options中的 Additional command line parameters: -parameters*/
+        Parameter[] parameters = method.getParameters();
+        String key;
+        for (int i = 0;i < parameters.length; i++) {
+            Parameter parameter = parameters[i];
+            key = parameter.getName();
+            if(parameter.isAnnotationPresent(Param.class)){
+                key = parameter.getAnnotation(Param.class).value();
             }
-
+            stringBuffer.append(key+"="+args[i]);
         }
         return stringBuffer.toString();
     }

@@ -81,7 +81,8 @@ public class ReflectHelper<T> {
 
     //首写字母变大写
     public static String firstUpperCase(String old){
-
-        return old.substring(0, 1).toUpperCase()+old.substring(1);
+        char[] chars = old.toCharArray();
+        chars[0] -= 32;
+        return String.valueOf(chars);
     }
 }

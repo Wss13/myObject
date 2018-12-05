@@ -17,7 +17,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableConfigServer
 @EnableEurekaClient
 @EnableSwagger2
-//@MapperScan("com.**.dao*")
 public class EurekaServerApplication {
     @Bean
     @LoadBalanced

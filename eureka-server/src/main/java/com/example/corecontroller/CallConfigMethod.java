@@ -26,7 +26,7 @@ public class CallConfigMethod {
     @RequestMapping(value = "modify")
     public void modify(Configuer configuer){
         try {
-            new Reflections("cn.*", new MethodAnnotationsScanner(), new TypeAnnotationsScanner(), new SubTypesScanner());
+//            new Reflections("cn.*", new MethodAnnotationsScanner(), new TypeAnnotationsScanner(), new SubTypesScanner());
             configureInit.modify(configuer);
         } catch (Exception e) {
             e.printStackTrace();

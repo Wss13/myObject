@@ -58,6 +58,7 @@ public class HelloApplication {
     @RequestMapping(value = "/users1", method = RequestMethod.GET)
     @ResponseBody
     public User getUser1(String id) throws InterruptedException {
+        System.out.println("==========================");
         Map map = new HashMap(16);
         map.put("email", "user");
         map.put("password", "123");

@@ -37,4 +37,5 @@ public class MDA {
     public static final String TEST_STRING_X = "1";
     public static final long TEST_LONG_S = 1;
     public static final int TEST_INT_S = 1;
+    public static final String TASKTEST_SCHEDULED = new String("0/20 * * * * ?");
 }
