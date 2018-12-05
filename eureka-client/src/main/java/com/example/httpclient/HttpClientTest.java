@@ -15,6 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @IpConfig("http://127.0.0.1:1111")
 public interface HttpClientTest {
-    @RequestMapping(value = "/users1", method = RequestMethod.GET)
-    public User getUser1(@Param("id") String id);
+    @RequestMapping(value = "/users1/{id}", method = RequestMethod.GET)
+    public User getUser1(@Param("id") String id,String name);
 }

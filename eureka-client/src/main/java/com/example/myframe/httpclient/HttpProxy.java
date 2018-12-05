@@ -49,12 +49,15 @@ public class HttpProxy<T> implements InvocationHandler,IHttpCommon {
             /**
              * 方法和类注解的地址进行拼接
              */
+            //获取ip和端口
             stringBuffer.append(parentClazz.getAnnotation(IpConfig.class).value());
-            stringBuffer.append(requestAnnotation.value()[0]);
+
+            String requestMappingValue = requestAnnotation.value()[0];
+
             String method1 = requestAnnotation.method()[0].toString();
             if(method1.equals("GET")){
                 if(args.length != 0){
-                    stringBuffer.append(doGet(method,args));
+                    stringBuffer.append(recombineUrl(requestMappingValue,method,args,true));
                 }
                 sendGet(stringBuffer.toString());
             }else if(method1.equals("POST")){
@@ -67,14 +70,38 @@ public class HttpProxy<T> implements InvocationHandler,IHttpCommon {
     }
 
     /**
+     * 对Restful 风格处理
+     * @param requestMappingValue
+     * @param method
+     * @param args
+     * @return
+     */
+    public String recombineUrl(String requestMappingValue,Method method,Object[] args,boolean methodType){
+        requestMappingValue += "?";
+        Parameter[] parameters = method.getParameters();
+        String key;
+        for (int i = 0;i < parameters.length; i++) {
+            Parameter parameter = parameters[i];
+            key = parameter.getName();
+            //判断是否有注解以注解为主
+            if(parameter.isAnnotationPresent(Param.class)){
+                key = parameter.getAnnotation(Param.class).value();
+            }
+            if(requestMappingValue.indexOf("{" +key+"}")>-1){
+                requestMappingValue = requestMappingValue.replaceAll("\\{" +key+"\\}",args[i].toString());
+            }else if(methodType){
+                requestMappingValue += key + "=" + args[i];
+            }
+        }
+        return requestMappingValue;
+    }
+    /**
      * GET请求时参数和地址进行拼接
      * @param method
      * @param args
      * @return
      */
-    public String doGet(Method method,Object[] args){
-        LocalVariableTableParameterNameDiscoverer u = new LocalVariableTableParameterNameDiscoverer();
-
+    public String getUrlSuffix(Method method,Object[] args){
         StringBuffer stringBuffer = new StringBuffer();
         stringBuffer.append("?");
         //jdk1.8关闭，默认是关闭的所以一开始用了注解的形式获取参数名称
@@ -84,6 +111,7 @@ public class HttpProxy<T> implements InvocationHandler,IHttpCommon {
         for (int i = 0;i < parameters.length; i++) {
             Parameter parameter = parameters[i];
             key = parameter.getName();
+            //判断是否有注解以注解为主
             if(parameter.isAnnotationPresent(Param.class)){
                 key = parameter.getAnnotation(Param.class).value();
             }
@@ -99,7 +127,7 @@ public class HttpProxy<T> implements InvocationHandler,IHttpCommon {
 
     @Override
     public String sendPost(String url, Map<String, String> map) {
-        return null;
+        return httpUitls.sendPost(url,map);
     }
 
     @Override

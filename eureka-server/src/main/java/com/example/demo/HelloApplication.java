@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -55,9 +56,9 @@ public class HelloApplication {
         return new User(Long.parseLong(id));
     }
 
-    @RequestMapping(value = "/users1", method = RequestMethod.GET)
+    @RequestMapping(value = "/users1/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public User getUser1(String id) throws InterruptedException {
+    public User getUser1(@PathVariable String id,String name) throws InterruptedException {
         System.out.println("==========================");
         Map map = new HashMap(16);
         map.put("email", "user");
