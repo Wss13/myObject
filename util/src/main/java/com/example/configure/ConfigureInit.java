@@ -52,7 +52,7 @@ public class ConfigureInit {
         ReflectHelper<Configuer> reflectHelper = new ReflectHelper<Configuer>();
         List<Configuer> configuerList = reflectHelper.getList(Configuer.class, rs);
         for (Configuer configuer : configuerList) {
-            /** 单次处理抛异常避免影响其他配置*/
+            /** 单次处理抛异常避免影响其他配置==*/
             try {
                 modify(configuer);
             } catch (Exception e) {
