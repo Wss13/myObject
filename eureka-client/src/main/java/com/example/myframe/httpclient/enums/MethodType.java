@@ -16,7 +16,7 @@ import java.util.Map;
 public enum MethodType {
     GET(new GetSendClient()),
     POST(new PostSendClient());
-    public SendClient sendClient;
+    private SendClient sendClient;
     private static Map<String,MethodType> map = new HashMap<>();
     MethodType(SendClient sendClient){
         this.sendClient = sendClient;
