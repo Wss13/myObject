@@ -38,9 +38,8 @@ public class HttpProxy<T> implements InvocationHandler {
     public Object toSent(Method method,Object[] args){
         //获取请求方式
         RequestMapping requestAnnotation = method.getAnnotation(RequestMapping.class);
-        String method1 = requestAnnotation.method()[0].toString();
         //发送请求
-        return MethodType.get(method1).send(method,args);
+        return MethodType.get(requestAnnotation.method()[0].toString()).send(method,args);
     }
 
 }
