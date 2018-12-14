@@ -26,20 +26,12 @@ public class HttpBuildFactoryBean<T> implements FactoryBean<T> {
         this.httpProxyFactory = httpProxyFactory;
     }
 
-    public HttpClientSession getHttpClientSession() {
-        return httpClientSession;
-    }
-
-    public void setHttpClientSession(HttpClientSession httpClientSession) {
-        this.httpClientSession = httpClientSession;
-    }
 
     private  Class<T> mapperInterface;
     private  HttpProxyFactory<T> httpProxyFactory;
-    private  HttpClientSession httpClientSession;
     @Override
     public T getObject() throws Exception {
-        return httpProxyFactory.newInstance(httpClientSession);
+        return httpProxyFactory.newInstance();
     }
 
     @Override

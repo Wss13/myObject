@@ -33,8 +33,8 @@ public class HttpProxyFactory<T> {
         return (T) Proxy.newProxyInstance(this.mapperInterface.getClassLoader(), new Class[]{this.mapperInterface}, httpProxy);
     }
 
-    public T newInstance(HttpClientSession sqlSession) {
-        HttpProxy<T> mapperProxy = new HttpProxy(sqlSession, this.mapperInterface);
+    public T newInstance() {
+        HttpProxy<T> mapperProxy = new HttpProxy( this.mapperInterface);
         return this.newInstance(mapperProxy);
     }
 

@@ -1,14 +1,16 @@
-package com.example.myframe.httpclient;
+package com.example.myframe.httpclient.send;
 
+import java.lang.reflect.Method;
 import java.util.Map;
 
 /**
  * Demo class
  *
  * @author liumc
- * @date 2018/11/20
+ * @date 2018/12/14
  */
-public interface IHttpCommon {
+public interface SendClient {
+    public Object send(Method method, Object[] args);
     /**
      * 发送HttpGet请求
      * @param url

@@ -37,14 +37,10 @@ public class HttpClientMock {
     public void doIoc(){
         Reflections reflections = new Reflections("com.example.httpclient");
         Set<Class<?>> classes = reflections.getTypesAnnotatedWith(IpConfig.class);
-        HttpClientSession httpClientSession = new HttpClientSession();
         for (Class<?> clazz:classes) {
             HttpBuildFactoryBean httpBuildFactoryBean = new HttpBuildFactoryBean();
-            httpBuildFactoryBean.setHttpClientSession(httpClientSession);
             HttpProxyFactory httpProxyFactory = new HttpProxyFactory(clazz);
-//            httpBuildFactoryBean.setHttpProxyFactory(httpProxyFactory);
-//            httpBuildFactoryBean.setMapperInterface(clazz);
-            beanFactory.registerSingleton(clazz.getName(),httpProxyFactory.newInstance(httpClientSession));
+            beanFactory.registerSingleton(clazz.getName(),httpProxyFactory.newInstance());
             try {
 //                httpBuildFactoryBean.getObject();
             } catch (Exception e) {
