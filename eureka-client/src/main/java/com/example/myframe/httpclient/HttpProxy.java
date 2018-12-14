@@ -27,15 +27,12 @@ public class HttpProxy<T> implements InvocationHandler {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         if (Object.class.equals(method.getDeclaringClass())) {
-            method.invoke(proxy,args);
+           return method.invoke(proxy,args);
         }else{
-            toSent(method,args);
+            return toSent(method,args);
         }
-
-
-        return null;
     }
-    public Object toSent(Method method,Object[] args){
+    private Object toSent(Method method,Object[] args){
         //获取请求方式
         RequestMapping requestAnnotation = method.getAnnotation(RequestMapping.class);
         //发送请求
