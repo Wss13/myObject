@@ -35,7 +35,6 @@ public class GetSendClient extends SendClientAbstract {
             String requestMappingValue = requestAnnotation.value()[0];
             stringBuffer.append(recombineUrl(requestMappingValue, method, args, true));
         }
-
         return sendGet(stringBuffer.toString());
     }
 

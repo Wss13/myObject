@@ -31,7 +31,7 @@ public class HttpClientMock {
      * 生成一个接口代理工厂
      */
     public void doIoc() {
-        Reflections reflections = new Reflections("com.example.httpclient");
+        Reflections reflections = new Reflections("com.example.*");
         Set<Class<?>> classes = reflections.getTypesAnnotatedWith(RemoteConfig.class);
         for (Class<?> clazz : classes) {
             HttpProxyFactory httpProxyFactory = new HttpProxyFactory(clazz);
