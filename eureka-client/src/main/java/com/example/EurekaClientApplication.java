@@ -20,7 +20,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableCircuitBreaker
 @EnableEurekaClient
 @SpringBootApplication
-@EnableSwagger2
 /**
  * Demo class
  *
