@@ -25,7 +25,6 @@ public class ConfigParamController {
     String foo;
     @RequestMapping(value = "foo")
     public String hi(){
-//        HttpClientTest t = (HttpClientTest) httpClientFactory.getHttpClient(HttpClientTest.class);
         httpClientTest.getUser1("213412","lmc");
         httpClientTest1.getUser1("adfsadfasdf");
         return foo;

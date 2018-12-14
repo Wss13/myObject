@@ -23,7 +23,7 @@ import java.util.Set;
 @Configuration
 public class ConfigFactory {
     @Bean
-    public ModuleFactory getModuleFactory() throws IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
+    public ModuleFactory getModuleFactory() {
         ModuleFactory<String,Class> moduleFactory = new ModuleFactory();
         Set<Class<?>> classes = new Reflections("com.*").getTypesAnnotatedWith(AppModule.class);
         for(Class clazz :classes){

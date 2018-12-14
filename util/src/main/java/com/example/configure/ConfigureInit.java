@@ -129,7 +129,7 @@ public class ConfigureInit {
             return;
         }
         /* class 生成实例*/
-        Object object = (Object)clazz.newInstance();
+        Object object = clazz.newInstance();
         Field field = object.getClass().getDeclaredField(configuer.getMoudleKeyName());
         AppModule appModuleParam = field.getAnnotation(AppModule.class);
 
@@ -137,7 +137,7 @@ public class ConfigureInit {
             return;
         }
         Field modifiersField = Field.class.getDeclaredField("modifiers");
-        //Field 的 modifiers 是私有的
+        //去除安全校验
         modifiersField.setAccessible(true);
         modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
         if (!field.isAccessible()) {
