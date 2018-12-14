@@ -15,8 +15,6 @@ import org.apache.http.util.EntityUtils;
 import org.springframework.data.repository.query.Param;
 
 import java.io.IOException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -27,61 +25,12 @@ import java.util.Map;
  * @author liumc
  * @date 2018/12/14
  */
-public abstract class SendClientAbstract implements SendClient{
-    /**
-     * 对Restful 风格处理
-     * @param requestMappingValue
-     * @param method
-     * @param args
-     * @return
-     */
-    public String recombineUrl(String requestMappingValue, Method method, Object[] args, boolean methodType){
-        requestMappingValue += "?";
-        Parameter[] parameters = method.getParameters();
-        String key;
-        for (int i = 0;i < parameters.length; i++) {
-            Parameter parameter = parameters[i];
-            key = parameter.getName();
-            //判断是否有注解以注解为主
-            if(parameter.isAnnotationPresent(Param.class)){
-                key = parameter.getAnnotation(Param.class).value();
-            }
-            if(requestMappingValue.indexOf("{" +key+"}")>-1){
-                requestMappingValue = requestMappingValue.replaceAll("\\{" +key+"\\}",args[i].toString());
-            }else if(methodType){
-                requestMappingValue += key + "=" + args[i];
-            }
-        }
-        return requestMappingValue;
-    }
-    /**
-     * GET请求时参数和地址进行拼接
-     * @param method
-     * @param args
-     * @return
-     */
-    public String getUrlSuffix(Method method,Object[] args){
-        StringBuffer stringBuffer = new StringBuffer();
-        stringBuffer.append("?");
-        //jdk1.8关闭，默认是关闭的所以一开始用了注解的形式获取参数名称
-        /** preferences-》Java Compiler->设置模块字节码版本1.8，Javac Options中的 Additional command line parameters: -parameters*/
-        Parameter[] parameters = method.getParameters();
-        String key;
-        for (int i = 0;i < parameters.length; i++) {
-            Parameter parameter = parameters[i];
-            key = parameter.getName();
-            //判断是否有注解以注解为主
-            if(parameter.isAnnotationPresent(Param.class)){
-                key = parameter.getAnnotation(Param.class).value();
-            }
-            stringBuffer.append(key+"="+args[i]);
-        }
-        return stringBuffer.toString();
-    }
+public abstract class SendClientAbstract implements SendClient {
     private static final CloseableHttpClient httpclient = HttpClients.createDefault();
 
     /**
      * 发送HttpGet请求
+     *
      * @param url
      * @return
      */
@@ -116,6 +65,7 @@ public abstract class SendClientAbstract implements SendClient{
 
     /**
      * 发送HttpPost请求，参数为map
+     *
      * @param url
      * @param map
      * @return
@@ -147,6 +97,7 @@ public abstract class SendClientAbstract implements SendClient{
 
     /**
      * 发送不带参数的HttpPost请求
+     *
      * @param url
      * @return
      */

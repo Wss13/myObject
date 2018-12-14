@@ -13,9 +13,7 @@ import java.lang.reflect.Method;
  * @date 2018/11/19
  */
 public class HttpProxy<T> implements InvocationHandler {
-    private final Class<T> mapperInterface;
-    public HttpProxy(Class<T> mapperInterface) {
-        this.mapperInterface = mapperInterface;
+    public HttpProxy() {
     }
 
     /**
@@ -38,17 +36,11 @@ public class HttpProxy<T> implements InvocationHandler {
         return null;
     }
     public Object toSent(Method method,Object[] args){
-
-        Class<?> parentClazz = method.getDeclaringClass();
+        //获取请求方式
         RequestMapping requestAnnotation = method.getAnnotation(RequestMapping.class);
-        /**
-         * 方法和类注解的地址进行拼接
-         */
-        //获取ip和端口
-
         String method1 = requestAnnotation.method()[0].toString();
-        MethodType.get(method1).send(method,args);
-        return null;
+        //发送请求
+        return MethodType.get(method1).send(method,args);
     }
 
 }

@@ -1,9 +1,8 @@
 package com.example.httpclient;
 
 import com.example.dto.User;
-import com.example.myframe.httpclient.module.IpConfig;
+import com.example.myframe.httpclient.module.RemoteConfig;
 import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author liumc
  * @date 2018/11/20
  */
-@IpConfig("http://127.0.0.1:1111")
+@RemoteConfig(ip = "http://127.0.0.1",port = "1111")
 public interface HttpClientTest {
     @RequestMapping(value = "/users1/{id}", method = RequestMethod.GET)
     public User getUser1(@Param("id") String id,String name);

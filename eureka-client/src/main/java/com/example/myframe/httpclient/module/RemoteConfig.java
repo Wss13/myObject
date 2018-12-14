@@ -17,6 +17,8 @@ import java.lang.annotation.Target;
 /* 设置生命周期*/
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface IpConfig {
-    String value() default "";
+public @interface RemoteConfig {
+    String ip() default "";
+
+    String port() default "";
 }
