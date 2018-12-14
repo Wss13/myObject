@@ -15,8 +15,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableEurekaServer
 @SpringBootApplication
 @EnableConfigServer
-//@EnableEurekaClient
-@EnableSwagger2
 public class EurekaServerApplication {
     @Bean
     @LoadBalanced
