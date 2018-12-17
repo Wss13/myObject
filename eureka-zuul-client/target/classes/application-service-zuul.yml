@@ -1,0 +1,50 @@
+spring:
+  application:
+    name: service-zuult
+server:
+  port: 5000
+eureka:
+  instance:
+      instance-id: ${spring.application.name}:${random.int}
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:1111/eureka/
+zuul:
+  routes:
+    hiapi:
+      path: /hiapi/**
+#      自带负载均衡功能
+      serviceId: eureka-client
+#      指定地址则没有负载均衡的功能
+#      url:http://localhost:8762
+    ribbonapi:
+       path: /ribbonapi/**
+       serviceId: eureka-ribbon-client
+    feignapi:
+      path: /feignapi/**
+      serviceId: eureka-feign-client
+  host:
+      connect-timeout-millis: 3000
+      socket-timeout-millis: 3000
+ribbon:
+  ReadTimeout: 3000
+  ConnectTimeout: 3000
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeout-in-milliseconds: 3000
+#指定端口配置负载均衡
+#zuul :
+#  routes:
+#    hiapi :
+#      path: /hiapi/**
+#        serviceid: hiapi-vl
+#ribbon:
+#  eureka :
+#    enabled: false
+#    hiapi-v1:
+#      ribbon:
+#        listOfServers : http://localhost:8762,http://localhost8763

@@ -11,6 +11,7 @@ import java.lang.reflect.Method;
 public class PostSendClient extends SendClientAbstract {
     @Override
     public Object send(Method method, Object[] args) {
+
         return null;
     }
 }

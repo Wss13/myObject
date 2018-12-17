@@ -14,6 +14,7 @@
         <module name="eureka-ribbon-client" />
         <module name="eureka-server" />
         <module name="eureka-zuul-client" />
+        <module name="maven-archiver" />
         <module name="util" />
       </profile>
     </annotationProcessing>

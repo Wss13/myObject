@@ -1,0 +1,35 @@
+#spring:
+#  profiles:
+#    active: eureka-client
+##    active: eureka-ribbon-client
+spring:
+  application:
+    name : config-client
+  cloud:
+    config :
+#      uri: http://localhost:8769
+      fail-fast: true
+      discovery:
+        enabled: true
+        serviceId: config-server
+    bus:
+      trace:
+        enabled: true
+  profiles:
+    active: dev
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+management:
+  security:
+    enabled: false
+server:
+  port: 9000
+eureka:
+  instance:
+      instance-id: ${spring.application.name}:${random.int}
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:1111/eureka/
