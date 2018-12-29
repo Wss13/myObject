@@ -14,7 +14,7 @@ import java.lang.reflect.Method;
  * @date 2018/11/19
  */
 public class HttpProxy<T> implements InvocationHandler {
-    private static final String RETURN_TYPE_NAME = "void";
+    private static final String RETURN_TYPE_VOID = "void";
     public HttpProxy() {
     }
 
@@ -37,7 +37,7 @@ public class HttpProxy<T> implements InvocationHandler {
                 return result;
             }
             String returnTypeName = method.getReturnType().getName();
-            if(RETURN_TYPE_NAME.equals(returnTypeName)){
+            if(RETURN_TYPE_VOID.equals(returnTypeName)){
                 return result;
             }
             return JSON.parseObject((String) result, Class.forName(method.getReturnType().getName()));
