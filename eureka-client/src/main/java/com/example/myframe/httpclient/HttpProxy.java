@@ -19,6 +19,7 @@ public class HttpProxy<T> implements InvocationHandler {
 
     /**
      * Http接口动态代理实现方法
+     *
      * @param proxy
      * @param method
      * @param args
@@ -28,16 +29,21 @@ public class HttpProxy<T> implements InvocationHandler {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         if (Object.class.equals(method.getDeclaringClass())) {
-           return method.invoke(proxy,args);
-        }else{
-            return JSON.parseObject((String) toSent(method,args),Class.forName(method.getReturnType().getName()));
+            return method.invoke(proxy, args);
+        } else {
+            Object result = toSent(method, args);
+            if (result == null) {
+                return result;
+            }
+            return JSON.parseObject((String) toSent(method, args), Class.forName(method.getReturnType().getName()));
         }
     }
-    private Object toSent(Method method,Object[] args){
+
+    private Object toSent(Method method, Object[] args) {
         //获取请求方式
         RequestMapping requestAnnotation = method.getAnnotation(RequestMapping.class);
         //发送请求
-        return MethodType.get(requestAnnotation.method()[0].toString()).send(method,args);
+        return MethodType.get(requestAnnotation.method()[0].toString()).send(method, args);
     }
 
 }
