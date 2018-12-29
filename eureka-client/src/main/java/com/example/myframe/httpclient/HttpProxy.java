@@ -1,5 +1,6 @@
 package com.example.myframe.httpclient;
 
+import com.alibaba.fastjson.JSON;
 import com.example.myframe.httpclient.enums.MethodType;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -29,7 +30,7 @@ public class HttpProxy<T> implements InvocationHandler {
         if (Object.class.equals(method.getDeclaringClass())) {
            return method.invoke(proxy,args);
         }else{
-            return toSent(method,args);
+            return JSON.parseObject((String) toSent(method,args),Class.forName(method.getReturnType().getName()));
         }
     }
     private Object toSent(Method method,Object[] args){
