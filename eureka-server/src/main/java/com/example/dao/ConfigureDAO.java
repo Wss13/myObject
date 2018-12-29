@@ -1,5 +1,6 @@
 package com.example.dao;
 
+import com.example.config.Page;
 import com.example.dto.Configuer;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -13,5 +14,5 @@ import java.util.List;
  */
 @Mapper
 public interface ConfigureDAO {
-    public List<Configuer> queryAllConfigure();
+    public List<Configuer> queryAllConfigure(Page page);
 }

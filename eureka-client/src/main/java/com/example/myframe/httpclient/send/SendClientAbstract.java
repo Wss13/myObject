@@ -30,7 +30,7 @@ import java.util.Map;
  * @author liumc
  * @date 2018/12/14
  */
-public abstract class SendClientAbstract implements SendClient {
+public abstract class   SendClientAbstract implements SendClient {
     private static final CloseableHttpClient httpclient = HttpClients.createDefault();
 
     /**
@@ -180,4 +180,5 @@ public abstract class SendClientAbstract implements SendClient {
         }
         return result;
     }
+
 }

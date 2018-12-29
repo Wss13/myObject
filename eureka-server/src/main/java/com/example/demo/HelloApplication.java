@@ -1,14 +1,18 @@
 package com.example.demo;
 
+import com.example.config.Page;
 import com.example.configure.plugin.IPlugin;
 import com.example.configure.plugin.PluginFactory;
 import com.example.dao.ConfigureDAO;
 import com.example.dao.UserMapper;
 import com.example.dto.User;
+import com.example.service.UserSMO;
+import com.example.util.MDA;
 import com.example.util.redis.RedisUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.lang.annotation.Retention;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -37,6 +42,9 @@ public class HelloApplication {
     private ConfigureDAO configureDAO;
     @Autowired
     private PluginFactory pluginFactory;
+    @Autowired
+    @Qualifier(value = "UserSMOImpl")
+    private UserSMO userSMO;
 
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public String index() throws InterruptedException {
@@ -53,7 +61,7 @@ public class HelloApplication {
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public User getUser(HttpServletRequest request) throws InterruptedException {
         String id = request.getParameter("id") == null ? "0" : request.getParameter("id");
-        return new User(Long.parseLong(id));
+        return new User();
     }
 
     @RequestMapping(value = "/users1/{id}", method = RequestMethod.GET)
@@ -63,13 +71,20 @@ public class HelloApplication {
         Map map = new HashMap(16);
         map.put("email", "user");
         map.put("password", "123");
+        redisUtils.getSet("qwe","qweeq");
         IPlugin<?> iPlugin = (IPlugin) pluginFactory.getPublic("A");
         Map a = (Map) iPlugin.printBeanName();
         IPlugin iPlugin1 = (IPlugin) pluginFactory.getPublic("B");
         iPlugin1.printBeanName();
-        configureDAO.queryAllConfigure();
+        long l = MDA.TEST_LONG_S;
+        configureDAO.queryAllConfigure(new Page(0,10));
+        userSMO.insertBatchUserToSqlSession();
+
         userMapper.isPassLoginCheck(map);
+//        userSMO.insertBatchUser();
+
         redisUtils.hget("lmc", "");
-        return new User(Long.parseLong(id));
+
+        return new User();
     }
 }

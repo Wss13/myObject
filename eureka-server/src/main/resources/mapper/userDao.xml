@@ -10,4 +10,24 @@
     <select id="isPassLoginCheck" resultType="java.lang.Integer" parameterType="java.util.Map">
         SELECT count(*) FROM t_user t WHERE t.username = #{email} AND t.password = #{password}
     </select>
+    <insert id="insertBatchUser" parameterType="java.util.List">
+        INSERT INTO t_user (
+        username,
+        id,
+        password,sex) VALUES <foreach collection="userList" separator="," item="user">
+        (
+        #{user.username},#{user.id},#{user.password},#{user.sex}
+        )
+    </foreach>
+    </insert>
+
+    <insert id="insertUser" parameterType="com.example.dto.User">
+        INSERT INTO t_user (
+        username,
+        id,
+        password,sex) VALUES
+        (
+        #{user.username},#{user.id},#{user.password},#{user.sex}
+        )
+    </insert>
 </mapper>

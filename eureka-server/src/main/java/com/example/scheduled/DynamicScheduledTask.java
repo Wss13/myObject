@@ -24,7 +24,6 @@ import java.util.Date;
 public class DynamicScheduledTask implements SchedulingConfigurer {
 
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
     @Override
     public void configureTasks(ScheduledTaskRegistrar scheduledTaskRegistrar) {
         scheduledTaskRegistrar.addTriggerTask(new Runnable() {

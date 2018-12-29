@@ -11,6 +11,7 @@ import java.util.Map;
  */
 public interface SendClient {
 
+
     /**
      * 提供给外部入口
      *

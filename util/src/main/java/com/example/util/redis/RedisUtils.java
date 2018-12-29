@@ -343,4 +343,17 @@ public class RedisUtils {
 		}
 		return result;
 	}
+
+	public String getSet(String key ,String value) {
+		String result = "";
+		if(key==null|| "".equals(key)){
+			return result;
+		}
+		try {
+			result = stringRedisTemplate.opsForValue().getAndSet(key,value);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return result;
+	}
 }

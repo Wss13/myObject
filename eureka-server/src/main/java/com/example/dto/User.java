@@ -7,17 +7,40 @@ package com.example.dto;
  * @date 2018/11/13
  */
 public class User {
-    public User(long l) {
-        this.id = l;
+    String username;
+    String id;
+    String password;
+    String sex;
+
+    public String getUsername() {
+        return username;
     }
 
-    public Long getId() {
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    private Long id;
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
 }
