@@ -1,3 +1,9 @@
+### Commons ###
+target/
+bin/
+out/
+!.mvn/wrapper/maven-wrapper.jar
+
 # Java
 *.class
 *.jar
@@ -11,6 +17,7 @@
 
 # Idea
 .idea
+.idea/
 *.iml
 *.iws
 *.ipr
