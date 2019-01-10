@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class RibbonController {
     @Autowired
     private RibbonService ribbonService;
-    @RequestMapping(value = "/hi", method = RequestMethod.GET)
+    @RequestMapping(value = "/hi1", method = RequestMethod.GET)
     public String hi(@RequestParam(required = false,defaultValue = "forezp") String name){
 //        ServiceInstance instance = client.getLocalServiceInstance();
 //        ServiceInstance serviceInstance =loadBalancerClient.choose("EUREKA-CLIENT");
